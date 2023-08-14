@@ -13,10 +13,10 @@ app.get('/',(req,res)=>{
 })
 // Route imports
 // const user = require('./routes/userRoutes');
-// const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 // app.use('/api/v1',user);
-// app.use('/', authRoutes);
+app.use('/', authRoutes);
 
 
 // Error Middleware

@@ -1,8 +1,8 @@
 const { Vonage } = require('@vonage/server-sdk');
 
 const vonage = new Vonage({
-    apiKey: proccess.env.SMS_API_KEY,
-    apiSecret: proccess.env.SECRET_API_KEY
+    apiKey: process.env.SMS_API_KEY,
+    apiSecret: process.env.SECRET_API_KEY
 });
 
 const sendOtp = async (number, otp) => {
