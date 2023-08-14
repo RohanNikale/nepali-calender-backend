@@ -25,16 +25,20 @@ exports.registerByOtp = async (req, res, next) => {
             existUser.otp = hashedOtp;
             existUser.otpExpiration = Date.now() + 5 * 60 * 1000;
             user = await existUser.save();
+            userExist=true
+
         } else {
             user = await User.create({
                 number,
+                name:'',
                 otp: hashedOtp,
                 otpExpiration: Date.now() + 10 * 60 * 1000,
             });
+            userExist=false
         }
 
         // Send the OTP here
-        // const response = await sendOtp(number, otp);
+        // const response =  sendOtp(number, otp);
 
         console.log({ otp });
 
@@ -42,6 +46,7 @@ exports.registerByOtp = async (req, res, next) => {
             message: 'The 5-digit OTP has been sent to your phone number',
             status: true,
             user,
+            userExist:userExist
         });
     } catch (error) {
         next(error);
@@ -50,7 +55,7 @@ exports.registerByOtp = async (req, res, next) => {
 
 exports.verifyOtp = async (req, res, next) => {
     try {
-        const { number, otp } = req.body;
+        const {name ,number, otp } = req.body;
 
         if (!number || !otp) {
             return next('Please provide a valid phone number and OTP', 422);
@@ -67,7 +72,9 @@ exports.verifyOtp = async (req, res, next) => {
         if (!validOtp || user.otpExpiration < Date.now()) {
             return next('The OTP you entered is invalid, expired, or used');
         }
-
+        if(user.name===''){
+            user.name=name
+        }
         user.otp = '';
         user.otpExpiration = '';
         await user.save();
