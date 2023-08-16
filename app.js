@@ -1,26 +1,26 @@
 const express = require('express');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
 
 const app = express();
+dotenv.config({ path: './Config/config.env' });
+
 const bodyParser = require('body-parser');
-dotenv.config({path:'./Config/config.env'})
 
 // Middlewares
 app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.get('/',(req,res)=>{
-    res.send('hello world')
-})
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Default route
+app.get('/', (req, res) => {
+    res.send('Hello, world!');
+});
+
 // Route imports
-// const user = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
+const eventRoutes = require('./routes/eventRoutes');
 
-const authRoutes = require('./routes/authRoutes')
-const Event = require('./routes/eventRoutes')
-
-// app.use('/api/v1',user);
 app.use('/auth', authRoutes);
-app.use('/event', Event);
-
+app.use('/event', eventRoutes);
 
 // Error Middleware
 

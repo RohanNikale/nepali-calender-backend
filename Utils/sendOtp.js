@@ -6,7 +6,7 @@ const vonage = new Vonage({
 });
 
 const sendOtp = async (number, otp) => {
-    const from = "Vonage APIs";
+    const from = 'Vonage APIs';
     const to = number;
     const text = `Your OTP is ${otp}`;
 

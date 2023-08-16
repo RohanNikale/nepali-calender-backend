@@ -7,7 +7,9 @@ exports.createEvent = async (req, res) => {
             title, date, eventRepeat, description,
             toDoList, location, remindBefore, Time
         } = req.body;
-        const userid = req.user.id
+
+        const userid = req.user.id;
+
         const newEvent = new Event({
             userid, title, date, eventRepeat, description,
             toDoList, location, remindBefore, Time
@@ -26,15 +28,15 @@ exports.createEvent = async (req, res) => {
 
 // Base function for updating and deleting an event
 async function modifyEvent(req, res, action) {
-    const eventid = req.headers.eventid;
-
     try {
+        const { eventid } = req.headers;
         const findEvent = await Event.findById(eventid);
 
-        if (!findEvent) {
-            return res.status(404).json({ status: false, message: 'Event not found' });
+        if (!findEvent || findEvent.userid.toString() !== req.user._id.toString()) {
+            return res.status(404).json({ status: false, message: 'Access denied' });
         }
 
+        // Perform the specified action (update or delete)
         const result = await action(eventid, req.body);
 
         if (!result) {
@@ -49,28 +51,19 @@ async function modifyEvent(req, res, action) {
 }
 
 // Endpoint for updating an event
-exports.updateEvent = (req, res) => modifyEvent(req, res, async (eventid, data) => {
-    return await Event.findByIdAndUpdate(eventid, data, { new: true });
-});
+exports.updateEvent = async (req, res) => {
+    const updateAction = async (eventid, data) => {
+        return await Event.findByIdAndUpdate(eventid, data, { new: true });
+    };
+
+    modifyEvent(req, res, updateAction);
+};
 
 // Endpoint for deleting an event
-exports.deleteEvent = (req, res) => modifyEvent(req, res, async (eventid) => {
-    return await Event.findByIdAndDelete(eventid);
-});
+exports.deleteEvent = async (req, res) => {
+    const deleteAction = async (eventid) => {
+        return await Event.findByIdAndDelete(eventid);
+    };
 
-// Endpoint for getting event data
-exports.getEventData = async (req, res) => {
-    try {
-        const eventid = req.headers.eventid;
-        const event = await Event.findById(eventid);
-
-        if (!event) {
-            return res.status(404).json({ status: false, message: 'Event not found' });
-        }
-
-        res.status(200).json({ status: true, event });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ status: false, message: 'An error occurred' });
-    }
+    modifyEvent(req, res, deleteAction);
 };

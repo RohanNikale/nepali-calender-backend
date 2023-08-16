@@ -1,8 +1,8 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const sendToken = require('../utils/jwtToken');
-const sendOtp = require('../Utils/sendOtp');
-const generateOtp = require('../Utils/generateOtp');
+const sendOtp = require('../utils/sendOtp');
+const generateOtp = require('../utils/generateOtp');
 
 exports.registerByOtp = async (req, res, next) => {
     try {
@@ -18,23 +18,21 @@ exports.registerByOtp = async (req, res, next) => {
         const otp = generateOtp();
         const hashedOtp = await bcrypt.hash(otp, 10);
 
-        const existUser = await User.findOne({ number });
-        let user;
+        let userExist = false;
+        let user = await User.findOne({ number });
 
-        if (existUser) {
-            existUser.otp = hashedOtp;
-            existUser.otpExpiration = Date.now() + 5 * 60 * 1000;
-            user = await existUser.save();
-            userExist=true
-
+        if (user) {
+            user.otp = hashedOtp;
+            user.otpExpiration = Date.now() + 5 * 60 * 1000;
+            user = await user.save();
+            userExist = true;
         } else {
             user = await User.create({
                 number,
-                name:'',
+                name: '',
                 otp: hashedOtp,
                 otpExpiration: Date.now() + 10 * 60 * 1000,
             });
-            userExist=false
         }
 
         // Send the OTP here
@@ -46,7 +44,7 @@ exports.registerByOtp = async (req, res, next) => {
             message: 'The 5-digit OTP has been sent to your phone number',
             status: true,
             user,
-            userExist:userExist
+            userExist,
         });
     } catch (error) {
         next(error);
@@ -55,7 +53,7 @@ exports.registerByOtp = async (req, res, next) => {
 
 exports.verifyOtp = async (req, res, next) => {
     try {
-        const {name ,number, otp } = req.body;
+        const { name, number, otp } = req.body;
 
         if (!number || !otp) {
             return next('Please provide a valid phone number and OTP', 422);
@@ -72,9 +70,11 @@ exports.verifyOtp = async (req, res, next) => {
         if (!validOtp || user.otpExpiration < Date.now()) {
             return next('The OTP you entered is invalid, expired, or used');
         }
-        if(user.name===''){
-            user.name=name
+
+        if (!user.name) {
+            user.name = name;
         }
+
         user.otp = '';
         user.otpExpiration = '';
         await user.save();
