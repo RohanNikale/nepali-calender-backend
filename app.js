@@ -18,9 +18,11 @@ app.get('/', (req, res) => {
 // Route imports
 const authRoutes = require('./routes/authRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const adminEventRoutes = require('./routes/adminEventRoutes');
 
 app.use('/auth', authRoutes);
 app.use('/event', eventRoutes);
+app.use('/admin/event', adminEventRoutes);
 
 // Error Middleware
 
