@@ -4,9 +4,11 @@ const eventSchema = new mongoose.Schema({
     userid: {
         type: String,
         required: true,
+   
     },
-    userName:{
-        type:String
+    userName: {
+        type: String,
+
     },
     title: {
         type: String,
@@ -25,7 +27,7 @@ const eventSchema = new mongoose.Schema({
         // required: [true, 'Please enter a description'],
     },
     toDoList: {
-        type:Array
+        type: Array
     },
     location: {
         type: String,
@@ -37,7 +39,10 @@ const eventSchema = new mongoose.Schema({
     Time: {
         type: String,
         // required: [true, 'Please set the time'],
-    }
-});
+    },
+},
+    { timestamps: true }
+
+);
 
 module.exports = mongoose.model('EventInfo', eventSchema);

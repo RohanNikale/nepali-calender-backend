@@ -16,8 +16,8 @@ const userSchema = new mongoose.Schema(
             // unique: true,
             // validate: [validator.isEmail, 'Please Enter a Valid Email'],
         },
-        adminAccess:{
-            type:Boolean
+        adminAccess: {
+            type: Boolean
         },
         emailView: {
             type: String,
@@ -104,8 +104,8 @@ const userSchema = new mongoose.Schema(
             enum: ['Only Me', 'Public'],
             // required: [true, "Please Specify the Work Status View"],
         },
-        companies:{
-            type:Array
+        companies: {
+            type: Array
         },
     },
     { timestamps: true }
