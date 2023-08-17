@@ -16,6 +16,9 @@ const userSchema = new mongoose.Schema(
             // unique: true,
             // validate: [validator.isEmail, 'Please Enter a Valid Email'],
         },
+        adminAccess:{
+            type:Boolean
+        },
         emailView: {
             type: String,
             enum: ['Only Me', 'Public'],

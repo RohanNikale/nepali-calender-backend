@@ -5,6 +5,9 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    userName:{
+        type:String
+    },
     title: {
         type: String,
         // required: [true, 'Please enter a title'],
