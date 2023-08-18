@@ -3,85 +3,95 @@ const mongoose = require("mongoose");
 const horoScopeSchema = new mongoose.Schema({
   userId: {
     type: String,
-    required: true,
+    // required: true,
   },
-  pageTitleinNepali: {
-    type: String,
-    required: true,
+  pageTitle: {
+    nepali: {
+      type: String,
+      // required: true
+    },
+    english: {
+      type: String,
+      // required: true
+    }
   },
-  pageTitleinEnglish: {
-    type: String,
-    required: true,
-  },
-  viewMode: {
-    type: String,
-    required: true,
-    enum: ["daily", "weekly", "monthly", "yearly"],
-  },
-  titleinNepali: {
-    type: String,
-    required: true,
-  },
-  titleinEnglish: {
-    type: String,
-    required: true,
+  title: {
+    nepali: {
+      type: String,
+      // required: true
+    },
+    english: {
+      type: String,
+      // required: true
+    }
   },
   fetureImg: {
     type: String,
-    required: true,
+    // required: true,
   },
-  startingLetterinNepali: {
-    type: String,
-    required: true,
+  startingLetter: {
+    nepali: {
+      type: String,
+      // required: true
+    },
+    english: {
+      type: String,
+      // required: true
+    }
   },
-  startingLetterinEnglish: {
-    type: String,
-    required: true,
+  description: {
+    nepali: {
+      type: String,
+      // required: true
+    },
+    english: {
+      type: String,
+      // required: true
+    }
   },
-  descriptioninEnglish: {
-    type: String,
-    required: true,
+  luckyNumber: {
+    nepali: {
+      type: String,
+      // required: true
+    },
+    english: {
+      type: String,
+      // required: true
+    }
   },
-  descriptioninNepali: {
-    type: String,
-    required: true,
+  luckyColor: {
+    nepali: {
+      type: String,
+      // required: true
+    },
+    english: {
+      type: String,
+      // required: true
+    }
   },
-  video: {
-    type: String,
-    required: true,
+  luckyDays: {
+    nepali: {
+      type: String,
+      // required: true
+    },
+    english: {
+      type: String,
+      // required: true
+    }
   },
-  luckyNumberinNepali: {
-    type: String,
-    required: true,
+  luckyStone: {
+    nepali: {
+      type: String,
+      // required: true
+    },
+    english: {
+      type: String,
+      // required: true
+    }
   },
-  luckyNumberinEnglish: {
-    type: String,
-    required: true,
-  },
-  luckyColorinNepali: {
-    type: String,
-    required: true,
-  },
-  luckyColorinEnglish: {
-    type: String,
-    required: true,
-  },
-  luckyDaysinNepali: {
-    type: String,
-    required: true,
-  },
-  luckyDaysinEnglish: {
-    type: String,
-    required: true,
-  },
-  luckyStoneinNepali: {
-    type: String,
-    required: true,
-  },
-  luckyStoneinEnglish: {
-    type: String,
-    required: true,
-  },
+  luckyDetail: {
+    type: Array
+  }
 });
 
 module.exports = mongoose.model("horoScope", horoScopeSchema);
