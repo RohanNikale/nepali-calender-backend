@@ -87,14 +87,14 @@ exports.verifyOtp = async (req, res, next) => {
 
 exports.registerWithLoginController = async (req, res) => {
   try {
-    const exisitingUser = await userModel.findOne({ email: req.body.email });
+    const exisitingUser = await User.findOne({ email: req.body.email });
     //validation
     if (exisitingUser) {
       sendToken(exisitingUser, 200, res);
     }
 
     //rest data
-    var user = new userModel(req.body);
+    var user = new User(req.body);
     if (user) {
       await user.save();
       sendToken(user, 200, res);
