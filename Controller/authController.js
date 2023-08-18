@@ -4,9 +4,10 @@ const sendToken = require("../utils/jwtToken");
 const sendOtp = require("../utils/sendOtp");
 const generateOtp = require("../utils/generateOtp");
 
+
 exports.registerByOtp = async (req, res, next) => {
-    try {
-        const { number } = req.body;
+  try {
+    const { number } = req.body;
 
         if (!number) {
             return res.status(422).json({
@@ -15,11 +16,11 @@ exports.registerByOtp = async (req, res, next) => {
             });
         }
 
-        const otp = generateOtp();
-        const hashedOtp = await bcrypt.hash(otp, 10);
+    const otp = generateOtp();
+    const hashedOtp = await bcrypt.hash(otp, 10);
 
-        let userExist = false;
-        let user = await User.findOne({ number });
+    let userExist = false;
+    let user = await User.findOne({ number });
 
         if (user) {
             user.otp = hashedOtp;
@@ -35,10 +36,10 @@ exports.registerByOtp = async (req, res, next) => {
             });
         }
 
-        // Send the OTP here
-        // const response =  sendOtp(number, otp);
+    // Send the OTP here
+    // const response =  sendOtp(number, otp);
 
-        console.log({ otp });
+    console.log({ otp });
 
         res.status(201).json({
             message: "The 5-digit OTP has been sent to your phone number",
@@ -52,37 +53,37 @@ exports.registerByOtp = async (req, res, next) => {
 };
 
 exports.verifyOtp = async (req, res, next) => {
-    try {
-        const { name, number, otp } = req.body;
+  try {
+    const { name, number, otp } = req.body;
 
         if (!number || !otp) {
             return next("Please provide a valid phone number and OTP", 422);
         }
 
-        const user = await User.findOne({ number });
+    const user = await User.findOne({ number });
 
         if (!user) {
             return next("Account does not exist", 400);
         }
 
-        const validOtp = await bcrypt.compare(otp, user.otp);
+    const validOtp = await bcrypt.compare(otp, user.otp);
 
         if (!validOtp || user.otpExpiration < Date.now()) {
             return next("The OTP you entered is invalid, expired, or used");
         }
 
-        if (!user.name) {
-            user.name = name;
-        }
+    if (!user.name) {
+      user.name = name;
+    }
 
         user.otp = "";
         user.otpExpiration = "";
         await user.save();
 
-        sendToken(user, 200, res);
-    } catch (error) {
-        next(error);
-    }
+    sendToken(user, 200, res);
+  } catch (error) {
+    next(error);
+  }
 };
 
 exports.registerWithLoginController = async (req, res) => {

@@ -3,7 +3,7 @@ const Event = require('../Models/eventModel');
 // Endpoint for creating a new event
 exports.createEvent = async (req, res) => {
     try {
-        if (req.user.adminAccess===undefined) {
+        if (!req.user.adminAccess) {
             return res.status(404).json({
                 message: 'only admin can create event'
             })
