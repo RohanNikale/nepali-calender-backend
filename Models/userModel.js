@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
     },
+    adminAccess:{
+      type : Boolean 
+
+  },
     profilePic: {
       type: String,
     },

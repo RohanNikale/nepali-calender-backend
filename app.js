@@ -18,10 +18,14 @@ app.get("/", (req, res) => {
 // Route imports
 const authRoutes = require("./routes/authRoutes");
 const eventRoutes = require("./routes/eventRoutes");
+const adminEventRoutes = require("./routes/adminEventRoutes");
 const horoScopeRoutes = require("./routes/horoScopeRoutes");
+const SuvaSaitsRoutes = require("./routes/suvaSaitsRoutes");
 
 app.use("/auth", authRoutes);
 app.use("/event", eventRoutes);
+app.use("/admin/event", adminEventRoutes);
+app.use("/suvasaits", SuvaSaitsRoutes);
 app.use("/horoscope", horoScopeRoutes);
 
 // Error Middleware
