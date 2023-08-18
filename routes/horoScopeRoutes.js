@@ -1,26 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const {
-  postHoroScope,
-  getAllHoroScope,
-  getSingleHoroScope,
-  updateHoroScope,
-  deleteHoroScope,
-} = require("../Controller/horoScopeController");
+    createHoroscope,
+    updateHoroscope,
+    deleteHoroscope,
+    getHoroscopeData,
+} = require("../Controller/horoScopeController.js");
 
-// post horoScope
-router.post("/create", postHoroScope);
+// Create a new horoscope
+router.post("/createhoroscope", createHoroscope);
 
-// get all horoScopes
-router.get("/getall", getAllHoroScope);
+// Update a horoscope
+router.put("/updatehoroscope", updateHoroscope);
 
-// get single horoscope
-router.get("/get/:id", getSingleHoroScope);
+// Delete a horoscope
+router.delete("/deletehoroscope", deleteHoroscope);
 
-// update horoscope
-router.put("/update/:id", updateHoroScope);
-
-// delete horoscope
-router.delete("/delete/:id", deleteHoroScope);
+// Get horoscope data
+router.get("/gethoroscope", getHoroscopeData);
 
 module.exports = router;
