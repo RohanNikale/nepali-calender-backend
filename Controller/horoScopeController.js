@@ -3,38 +3,11 @@ const Horoscope = require('../Models/horoscopeModel');
 // Endpoint for creating a new horoscope
 exports.createHoroscope = async (req, res) => {
     try {
-        const {
-            userId,
-            pageTitle: { nepali: pageTitleNepali, english: pageTitleEnglish },
-            viewMode,
-            title: { nepali: titleNepali, english: titleEnglish },
-            fetureImg,
-            startingLetter: { nepali: startingLetterNepali, english: startingLetterEnglish },
-            description: { nepali: descriptionNepali, english: descriptionEnglish },
-            video,
-            luckyNumber: { nepali: luckyNumberNepali, english: luckyNumberEnglish },
-            luckyColor: { nepali: luckyColorNepali, english: luckyColorEnglish },
-            luckyDays: { nepali: luckyDaysNepali, english: luckyDaysEnglish },
-            luckyStone: { nepali: luckyStoneNepali, english: luckyStoneEnglish },
-        } = req.body;
-
-        const newHoroscope = new Horoscope({
-            userId,
-            pageTitle: { nepali: pageTitleNepali, english: pageTitleEnglish },
-            viewMode,
-            title: { nepali: titleNepali, english: titleEnglish },
-            fetureImg,
-            startingLetter: { nepali: startingLetterNepali, english: startingLetterEnglish },
-            description: { nepali: descriptionNepali, english: descriptionEnglish },
-            video,
-            luckyNumber: { nepali: luckyNumberNepali, english: luckyNumberEnglish },
-            luckyColor: { nepali: luckyColorNepali, english: luckyColorEnglish },
-            luckyDays: { nepali: luckyDaysNepali, english: luckyDaysEnglish },
-            luckyStone: { nepali: luckyStoneNepali, english: luckyStoneEnglish },
-        });
-
+        const userId = req.user.id
+        const newHoroscope = new Horoscope({userId,...req.body});
         await newHoroscope.save();
-
+        console.log("newHoroscope")
+        
         res.status(201).json({
             message: 'Successfully created horoscope',
             status: true

@@ -15,11 +15,6 @@ const horoScopeSchema = new mongoose.Schema({
       // required: true
     }
   },
-  file: {
-    type: String,
-    // required: true,
-    enum: ["daily", "weekly", "monthly", "yearly"],
-  },
   title: {
     nepali: {
       type: String,

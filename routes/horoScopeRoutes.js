@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { isAuthenticatedUser } = require('../Middleware/auth');
+
 const {
     createHoroscope,
     updateHoroscope,
@@ -8,13 +10,13 @@ const {
 } = require("../Controller/horoScopeController.js");
 
 // Create a new horoscope
-router.post("/createhoroscope", createHoroscope);
+router.post("/createhoroscope",isAuthenticatedUser, createHoroscope);
 
 // Update a horoscope
-router.put("/updatehoroscope", updateHoroscope);
+router.put("/updatehoroscope",isAuthenticatedUser, updateHoroscope);
 
 // Delete a horoscope
-router.delete("/deletehoroscope", deleteHoroscope);
+router.delete("/deletehoroscope",isAuthenticatedUser, deleteHoroscope);
 
 // Get horoscope data
 router.get("/gethoroscope", getHoroscopeData);
