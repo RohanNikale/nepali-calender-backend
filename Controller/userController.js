@@ -1,10 +1,18 @@
+const User=require('../models/userModel')
+// User CRUD
 
+// update User by Id
 exports.updateUser = async (req, res) => {
     try {
-        const { userId } = req.headers;
+        const userId = req.headers.userid;
         const updatedData = req.body;
-        if(!userId && !updatedData && !req.user.id===userId){
-            return res.status('Access denied.')
+        console.log(req.user.id)
+        if(!(userId==req.user.id)){
+            console.log('hello')
+            return res.status(404).json({
+                success: false,
+                message: 'Access denied.',
+            })
         }
         const updatedUser = await User.findByIdAndUpdate(userId, updatedData);
 
@@ -28,5 +36,32 @@ exports.updateUser = async (req, res) => {
             message: 'Error in Update API',
             error,
         });
+    }
+};
+
+
+
+// Get user info by user ID
+exports.getUserInfoById = async (req, res) => {
+    try {
+        const userId=req.headers.userid
+        console.log(req.headers)
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(401).json({
+                success:false,
+                message:'User not found'
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: 'successfully',
+            user,
+        })
+        
+    } catch (error) {
+        throw error;
     }
 };
