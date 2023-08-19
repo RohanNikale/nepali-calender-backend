@@ -3,42 +3,38 @@ const mongoose = require('mongoose');
 const eventSchema = new mongoose.Schema({
     userid: {
         type: String,
-        required: true,
+        required:  [true, 'Please Provide valid token'],
    
     },
     userName: {
         type: String,
-
+        required:  [true, 'Please update your name'],
     },
     title: {
         type: String,
-        // required: [true, 'Please enter a title'],
+        required: [true, 'Please enter a title'],
     },
-    date: {
+    dateAndTime: {
         type: Date,
-        // required: [true, 'Please enter a date'],
+        required: [true, 'Please enter a date'],
     },
     eventRepeat: {
         type: Boolean,
-        // required: [true, 'Please select event repeat'],
+        required: [true, 'Please select event repeat'],
     },
     description: {
         type: String,
-        // required: [true, 'Please enter a description'],
+        required: [true, 'Please enter a description'],
     },
     toDoList: {
         type: Array
     },
     location: {
         type: String,
-        // required: [true, 'Please enter a location'],
+        required: [true, 'Please enter a location'],
     },
     remindBefore: {
         type: Number,
-    },
-    Time: {
-        type: String,
-        // required: [true, 'Please set the time'],
     },
 },
     { timestamps: true }
