@@ -22,6 +22,9 @@ const eventRoutes = require("./routes/eventRoutes");
 const adminEventRoutes = require("./routes/adminEventRoutes");
 const horoScopeRoutes = require("./routes/horoScopeRoutes");
 const SuvaSaitsRoutes = require("./routes/suvaSaitsRoutes");
+const path = require('path');
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
