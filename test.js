@@ -1,69 +1,31 @@
-const Event = require('../models/eventModel');
-
-// Endpoint for creating a new event
-exports.createEvent = async (req, res) => {
+exports.updateUserById = async (req, res) => {
     try {
-        const {
-            title, date, eventRepeat, description,
-            toDoList, location, remindBefore, Time
-        } = req.body;
+        const { userId } = req.headers;
+        const updatedData = req.body;
+        if(!userId && !updatedData && !req.user.id===userId){
+            return res.status('Access denied.')
+        }
+        const updatedUser = await User.findByIdAndUpdate(userId, updatedData);
 
-        const userid = req.user.id;
-
-        const newEvent = new Event({
-            userid, title, date, eventRepeat, description,
-            toDoList, location, remindBefore, Time
-        });
-
-        await newEvent.save();
-
-        res.status(201).json({
-            message: 'Successfully created event',
-            status: true
-        });
-    } catch (error) {
-        res.status(500).json(error);
-    }
-};
-
-// Base function for updating and deleting an event
-async function modifyEvent(req, res, action) {
-    try {
-        const { eventid } = req.headers;
-        const findEvent = await Event.findById(eventid);
-
-        if (!findEvent || findEvent.userid.toString() !== req.user._id.toString()) {
-            return res.status(404).json({ status: false, message: 'Access denied' });
+        if (!updatedUser) {
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
         }
 
-        // Perform the specified action (update or delete)
-        const result = await action(eventid, req.body);
-
-        if (!result) {
-            return res.status(404).json({ status: false, message: 'Event not found' });
-        }
-
-        res.status(200).json({ status: true, message: 'Operation successful', result });
+        return res.status(200).json({
+            success: true,
+            message: 'User updated successfully',
+            updatedUser,
+        });
+        
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ status: false, message: 'An error occurred' });
+        res.status(500).json({
+            success: false,
+            message: 'Error in Update API',
+            error,
+        });
     }
-}
-
-// Endpoint for updating an event
-exports.updateEvent = async (req, res) => {
-    const updateAction = async (eventid, data) => {
-        return await Event.findByIdAndUpdate(eventid, data, { new: true });
-    };
-
-    modifyEvent(req, res, updateAction);
-};
-
-// Endpoint for deleting an event
-exports.deleteEvent = async (req, res) => {
-    const deleteAction = async (eventid) => {
-        return await Event.findByIdAndDelete(eventid);
-    };
-
-    modifyEvent(req, res, deleteAction);
 };

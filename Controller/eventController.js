@@ -4,13 +4,13 @@ const Event = require('../Models/eventModel');
 exports.createEvent = async (req, res) => {
     try {
         const {
-            title, date, eventRepeat, description,
-            toDoList, location, remindBefore, Time
+            title, dateAndTime, eventRepeat, description,
+            toDoList, location, remindBefore
         } = req.body;
         const userid = req.user.id
+        const userName = req.user.name
         const newEvent = new Event({
-            userid, title, date, eventRepeat, description,
-            toDoList, location, remindBefore, Time
+            userid, userName,...req.body
         });
 
         await newEvent.save();
