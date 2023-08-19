@@ -3,10 +3,6 @@ const Event = require('../Models/eventModel');
 // Endpoint for creating a new event
 exports.createEvent = async (req, res) => {
     try {
-        const {
-            title, dateAndTime, eventRepeat, description,
-            toDoList, location, remindBefore
-        } = req.body;
         const userid = req.user.id
         const userName = req.user.name
         const newEvent = new Event({
@@ -43,8 +39,7 @@ async function modifyEvent(req, res, action) {
 
         res.status(200).json({ status: true, message: 'Operation successful', result });
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ status: false, message: 'An error occurred' });
+        res.status(500).json({ status: false, message: 'An error occurred',error });
     }
 }
 
@@ -70,7 +65,6 @@ exports.getEventData = async (req, res) => {
 
         res.status(200).json({ status: true, event });
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ status: false, message: 'An error occurred' });
+        res.status(500).json({ status: false, message: 'An error occurred',error });
     }
 };

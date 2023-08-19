@@ -53,8 +53,7 @@ async function modifyEvent(req, res, action) {
 
         res.status(200).json({ status: true, message: 'Operation successful', result });
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ status: false, message: 'An error occurred' });
+        res.status(500).json({ status: false, message: 'An error occurred',error });
     }
 }
 
@@ -81,7 +80,6 @@ exports.getEventData = async (req, res) => {
 
         res.status(200).json({ status: true, event });
     } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ status: false, message: 'An error occurred' });
+        res.status(500).json({ status: false, message: 'An error occurred',error });
     }
 };

@@ -6,9 +6,7 @@ exports.updateUser = async (req, res) => {
     try {
         const userId = req.headers.userid;
         const updatedData = req.body;
-        console.log(req.user.id)
         if(!(userId==req.user.id)){
-            console.log('hello')
             return res.status(404).json({
                 success: false,
                 message: 'Access denied.',
@@ -45,7 +43,6 @@ exports.updateUser = async (req, res) => {
 exports.getUserInfoById = async (req, res) => {
     try {
         const userId=req.headers.userid
-        console.log(req.headers)
         const user = await User.findById(userId);
 
         if (!user) {

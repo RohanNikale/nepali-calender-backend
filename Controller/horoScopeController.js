@@ -1,21 +1,5 @@
 const Horoscope = require('../Models/horoscopeModel');
-
-// Endpoint for creating a new horoscope
-exports.createHoroscope = async (req, res) => {
-    try {
-        const userId = req.user.id
-        const newHoroscope = new Horoscope({userId,...req.body});
-        await newHoroscope.save();
-        console.log("newHoroscope")
-        
-        res.status(201).json({
-            message: 'Successfully created horoscope',
-            status: true
-        });
-    } catch (error) {
-        res.status(500).json(error);
-    }
-};
+const upload =require('../Config/multerSetup')
 
 // Base function for updating and deleting a horoscope
 async function modifyHoroscope(req, res, action) {
@@ -37,9 +21,34 @@ async function modifyHoroscope(req, res, action) {
         res.status(200).json({ status: true, message: 'Operation successful', result });
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ status: false, message: 'An error occurred' });
+        res.status(500).json({ status: false, message: 'An error occurred',error });
     }
 }
+
+// Endpoint for creating a new horoscope with image upload
+exports.createHoroscope = [
+    upload.single('fetureImg'),
+    async (req, res) => {
+        try {
+            const userId = req.user.id;
+
+            const newHoroscope = new Horoscope({
+                userId,
+                ...req.body,
+                fetureImg: `\\${req.file.path}`
+            });
+            
+            await newHoroscope.save();
+
+            res.status(201).json({
+                message: 'Successfully created horoscope',
+                status: true
+            });
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+];
 
 // Endpoint for updating a horoscope
 exports.updateHoroscope = (req, res) => modifyHoroscope(req, res, async (horoscopeId, data) => {
