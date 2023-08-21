@@ -17,12 +17,17 @@ app.get("/", (req, res) => {
 
 // Route imports
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const adminEventRoutes = require("./routes/adminEventRoutes");
 const horoScopeRoutes = require("./routes/horoScopeRoutes");
 const SuvaSaitsRoutes = require("./routes/suvaSaitsRoutes");
+const path = require('path');
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 app.use("/event", eventRoutes);
 app.use("/admin/event", adminEventRoutes);
 app.use("/suvasaits", SuvaSaitsRoutes);

@@ -22,7 +22,6 @@ exports.createSuvaSaits = async (req, res) => {
 // Base function for updating and deleting an SuvaSaits
 async function modifySuvaSaits(req, res, action) {
     const SuvaSaitsid = req.headers.suvasaitsid;
-    console.log(SuvaSaitsid)
     try {
         const findSuvaSaits = await SuvaSaits.findById(SuvaSaitsid);
 
