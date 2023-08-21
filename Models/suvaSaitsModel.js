@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const SuvaSaitsSchema = new mongoose.Schema({
-    userid: {
+    userId: {
         type: String,
         required: true,
         // required: [true, 'Please enter a title'],

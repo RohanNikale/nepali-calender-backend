@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const { createEvent, updateEvent, deleteEvent, getEventData } = require('../Controller/eventController');
-const { isAuthenticatedUser } = require('../Middleware/auth');
+const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
 
 // Create Event
-router.post('/createevent', isAuthenticatedUser, createEvent);
+router.post('/createevent', isAuthenticatedAdmin, createEvent);
 
 // Update Event
-router.put('/updateevent', isAuthenticatedUser, updateEvent);
+router.put('/updateevent', isAuthenticatedAdmin, updateEvent);
 
 // Delete Event
-router.delete('/deleteevent', isAuthenticatedUser, deleteEvent);
+router.delete('/deleteevent', isAuthenticatedAdmin, deleteEvent);
 
 // Read Event
 router.get('/geteventdata', getEventData);

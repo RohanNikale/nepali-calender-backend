@@ -33,7 +33,12 @@ exports.updateHoroscope = async (req, res) => {
 
     try {
         const findHoroscope = await Horoscope.findById(horoscopeId);
-
+        if(!(userId==req.user.id)){
+            return res.status(404).json({
+                success: false,
+                message: 'Access denied.',
+            })
+        }
         if (!findHoroscope) {
             return res.status(404).json({ status: false, message: 'Horoscope not found' });
         }

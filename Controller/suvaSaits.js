@@ -24,7 +24,12 @@ async function modifySuvaSaits(req, res, action) {
     const SuvaSaitsid = req.headers.suvasaitsid;
     try {
         const findSuvaSaits = await SuvaSaits.findById(SuvaSaitsid);
-
+        if(!(findSuvaSaits.userId==req.user.id)){
+            return res.status(404).json({
+                success: false,
+                message: 'Access denied.',
+            })
+        }
         if (!findSuvaSaits) {
             return res.status(404).json({ status: false, message: 'SuvaSaits not found' });
         }

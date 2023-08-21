@@ -4,15 +4,9 @@ const User=require('../models/userModel')
 // update User by Id
 exports.updateUser = async (req, res) => {
     try {
-        const userId = req.headers.userid;
         const updatedData = req.body;
-        if(!(userId==req.user.id)){
-            return res.status(404).json({
-                success: false,
-                message: 'Access denied.',
-            })
-        }
-        const updatedUser = await User.findByIdAndUpdate(userId, updatedData);
+
+        const updatedUser = await User.findByIdAndUpdate(req.user.id, updatedData);
 
         if (!updatedUser) {
             return res.status(404).json({

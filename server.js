@@ -6,6 +6,6 @@ dotenv.config();
 // Connecting to the database
 require('./config/database');
 
-const server = app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log(`Server is running at http://localhost:${process.env.PORT}`);
 });
