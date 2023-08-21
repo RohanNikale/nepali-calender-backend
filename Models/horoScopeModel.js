@@ -18,7 +18,7 @@ const horoScopeSchema = new mongoose.Schema({
   horoscopeDisplay:{
     type:String,
     enum:['daily','weekly','monthly','yearly'],
-    required:  [true, 'Please select horoscope desplay']
+    required:  [true, 'Please select horoscope display']
   }
   ,
   title: {

@@ -3,7 +3,7 @@ const path = require('path');
 
 // Set up the storage engine for Multer
 const storage = multer.diskStorage({
-    destination: './uploads/horoscopeFiles/', // Define the destination folder for uploaded images
+    destination: './uploads/',
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         const ext = path.extname(file.originalname);
