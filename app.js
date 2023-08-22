@@ -23,6 +23,7 @@ const adminEventRoutes = require("./routes/adminEventRoutes");
 const horoScopeRoutes = require("./routes/horoScopeRoutes");
 const SuvaSaitsRoutes = require("./routes/suvaSaitsRoutes");
 const CategoryRoutes = require("./routes/categoryRoutes");
+const businessRoutes = require("./routes/businessRoutes");
 const path = require('path');
 
 
@@ -41,6 +42,8 @@ app.use("/admin/event", adminEventRoutes);
 app.use("/suvasaits", SuvaSaitsRoutes);
 
 app.use("/horoscope", horoScopeRoutes);
+
+app.use("/business", businessRoutes);
 
 app.use('/category',CategoryRoutes)
 
