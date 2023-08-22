@@ -87,7 +87,7 @@ const userSchema = new mongoose.Schema(
       enum: ["Only Me", "Public"],
     },
     companies: {
-      type: Array,
+      type: Object,
     },
   },
   { timestamps: true }
