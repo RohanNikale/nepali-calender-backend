@@ -7,12 +7,12 @@ const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
 router.post('/createevent', isAuthenticatedAdmin, createEvent);
 
 // Update Event
-router.put('/updateevent', isAuthenticatedAdmin, updateEvent);
+router.put('/updateevent/:eventid', isAuthenticatedAdmin, updateEvent);
 
 // Delete Event
-router.delete('/deleteevent', isAuthenticatedAdmin, deleteEvent);
+router.delete('/deleteevent/:eventid', isAuthenticatedAdmin, deleteEvent);
 
 // Read Event
-router.get('/geteventdata', getEventData);
+router.get('/geteventdata/:eventid', getEventData);
 
 module.exports = router;

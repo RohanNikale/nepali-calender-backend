@@ -29,11 +29,10 @@ exports.createHoroscope = [
 
 // Endpoint for updating a horoscope
 exports.updateHoroscope = async (req, res) => {
-    const horoscopeId = req.headers.horoscopeid;
-
+    const horoscopeId = req.params.horoscopeid;
     try {
         const findHoroscope = await Horoscope.findById(horoscopeId);
-        if(!(userId==req.user.id)){
+        if (!(findHoroscope.userId == req.user.id)) {
             return res.status(404).json({
                 success: false,
                 message: 'Access denied.',
@@ -58,11 +57,11 @@ exports.updateHoroscope = async (req, res) => {
 
 // Endpoint for deleting a horoscope
 exports.deleteHoroscope = async (req, res) => {
-    const horoscopeId = req.headers.horoscopeid;
+    const horoscopeId = req.params.horoscopeid;
+
 
     try {
         const findHoroscope = await Horoscope.findById(horoscopeId);
-
         if (!findHoroscope) {
             return res.status(404).json({ status: false, message: 'Horoscope not found' });
         }
@@ -78,7 +77,8 @@ exports.deleteHoroscope = async (req, res) => {
 
 // Endpoint for getting horoscope data
 exports.getHoroscopeData = async (req, res) => {
-    const horoscopeId = req.headers.horoscopeid;
+    const horoscopeId = req.params.horoscopeid;
+
 
     try {
         const horoscope = await Horoscope.findById(horoscopeId);

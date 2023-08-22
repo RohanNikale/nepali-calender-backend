@@ -6,7 +6,10 @@ exports.createRashifal = [
     upload.single('audioFile'),
     async (req, res) => {
         try {
-            const newRashifal = new Rashifal({ audioFile: `${req.file.path}`, ...req.body });
+            const newRashifal = new Rashifal(
+                {
+                //  audioFile: `${req.file.path},`
+                 ...req.body });
 
             await newRashifal.save();
 
@@ -22,8 +25,7 @@ exports.createRashifal = [
 
 // Base function for updating and deleting a Rashifal
 async function modifyRashifal(req, res, action) {
-    const rashifalId = req.headers.rashifalid;
-
+    const rashifalId = req.params.rashifalid;
     try {
         const findRashifal = await Rashifal.findById(rashifalId);
         console.log(req.body);

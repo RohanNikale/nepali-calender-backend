@@ -22,13 +22,13 @@ const {
 router.post("/createhoroscope",isAuthenticatedAdmin, createHoroscope);
 
 // Update a horoscope
-router.put("/updatehoroscope",isAuthenticatedAdmin, updateHoroscope);
+router.put("/updatehoroscope/:horoscopeid",isAuthenticatedAdmin, updateHoroscope);
 
 // Delete a horoscope
-router.delete("/deletehoroscope",isAuthenticatedAdmin, deleteHoroscope);
+router.delete("/deletehoroscope/:horoscopeid",isAuthenticatedAdmin, deleteHoroscope);
 
 // Get horoscope data
-router.get("/gethoroscope", getHoroscopeData);
+router.get("/gethoroscope/:horoscopeid", getHoroscopeData);
 
 
 
@@ -39,12 +39,12 @@ router.get("/gethoroscope", getHoroscopeData);
 router.post('/addrashifal', isAuthenticatedAdmin, createRashifal);
 
 // Update Horoscope
-router.put('/updaterashifal', isAuthenticatedAdmin, updateRashifal);
+router.put('/updaterashifal/:rashifalid', isAuthenticatedAdmin, updateRashifal);
 
 // Delete Rashifal
-router.delete('/deleteRashifal', isAuthenticatedAdmin, deleteRashifal);
+router.delete('/deleteRashifal/:rashifalid', isAuthenticatedAdmin, deleteRashifal);
 
 // Read Rashifal
-router.get('/getRashifaldata', getRashifalData);
+router.get('/getRashifaldata/:rashifalid', getRashifalData);
 
 module.exports = router;

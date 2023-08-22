@@ -23,7 +23,7 @@ exports.createCategory = async (req, res) => {
 
 // Base function for updating and deleting a category
 async function modifyCategory(req, res, action) {
-    const categoryid = req.headers.categoryid;
+    const categoryid = req.params.categoryid;
 
     try {
         const findCategory = await Category.findById(categoryid);
@@ -45,6 +45,7 @@ async function modifyCategory(req, res, action) {
 
         res.status(200).json({ status: true, message: 'Operation successful', result });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ status: false, message: 'An error occurred', error });
     }
 }
@@ -62,7 +63,8 @@ exports.deleteCategory = (req, res) => modifyCategory(req, res, async (categoryi
 // Endpoint for getting category data
 exports.getCategoryData = async (req, res) => {
     try {
-        const categoryid = req.headers.categoryid;
+        const categoryid = req.params.categoryid;
+
         const category = await Category.findById(categoryid);
 
         if (!category) {
