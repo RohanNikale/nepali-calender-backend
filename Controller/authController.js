@@ -37,7 +37,7 @@ exports.SignUpLoginByOtp = async (req, res, next) => {
         }
 
         // Send the OTP here
-        // const response =  sendOtp(number, otp);
+        // sendOtp(number, otp);
 
         console.log({ otp });
 

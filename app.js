@@ -24,6 +24,7 @@ const horoScopeRoutes = require("./routes/horoScopeRoutes");
 const SuvaSaitsRoutes = require("./routes/suvaSaitsRoutes");
 const CategoryRoutes = require("./routes/categoryRoutes");
 const businessRoutes = require("./routes/businessRoutes");
+const advertisementRoutes = require("./routes/advertisementRoutes");
 const path = require('path');
 
 
@@ -44,6 +45,8 @@ app.use("/suvasaits", SuvaSaitsRoutes);
 app.use("/horoscope", horoScopeRoutes);
 
 app.use("/business", businessRoutes);
+
+app.use("/advertisement", advertisementRoutes);
 
 app.use('/category',CategoryRoutes)
 
