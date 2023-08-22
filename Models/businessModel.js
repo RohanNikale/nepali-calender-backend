@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const businessSchema = new mongoose.Schema({
+  userId:{
+    type: String,
+    required: true
+  },
   businessName: {
     type: String,
     required: true
