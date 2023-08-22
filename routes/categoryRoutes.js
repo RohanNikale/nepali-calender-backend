@@ -7,12 +7,12 @@ const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
 router.post('/createcategory', isAuthenticatedAdmin, createCategory);
 
 // Update Event
-router.put('/updatecategory', isAuthenticatedAdmin, updateCategory);
+router.put('/updatecategory/:categoryid', isAuthenticatedAdmin, updateCategory);
 
 // Delete Event
-router.delete('/deletecategory', isAuthenticatedAdmin, deleteCategory);
+router.delete('/deletecategory/:categoryid', isAuthenticatedAdmin, deleteCategory);
 
 // Read Event
-router.get('/getcategorydata', getCategoryData);
+router.get('/getcategorydata/:categoryid', getCategoryData);
 
 module.exports = router;

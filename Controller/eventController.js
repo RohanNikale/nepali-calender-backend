@@ -22,11 +22,12 @@ exports.createEvent = async (req, res) => {
 
 // Base function for updating and deleting an event
 async function modifyEvent(req, res, action) {
-    const eventid = req.headers.eventid;
+    const eventid = req.params.eventid;
 
     try {
         const findEvent = await Event.findById(eventid);
-        if(!(findEvent.userId==req.user.id)){
+        console.log(findEvent.userid)
+        if(!(req.user.id===findEvent.userid)){
             return res.status(404).json({
                 success: false,
                 message: 'Access denied.',
@@ -44,6 +45,7 @@ async function modifyEvent(req, res, action) {
 
         res.status(200).json({ status: true, message: 'Operation successful', result });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ status: false, message: 'An error occurred',error });
     }
 }
@@ -61,7 +63,8 @@ exports.deleteEvent = (req, res) => modifyEvent(req, res, async (eventid) => {
 // Endpoint for getting event data
 exports.getEventData = async (req, res) => {
     try {
-        const eventid = req.headers.eventid;
+        const eventid = req.params.eventid;
+
         const event = await Event.findById(eventid);
 
         if (!event) {

@@ -3,9 +3,9 @@ const SuvaSaits = require('../Models/suvaSaitsModel');
 // Endpoint for creating a new SuvaSaits
 exports.createSuvaSaits = async (req, res) => {
     try {
-        const userid = req.user.id
+        const userId = req.user.id
         const newSuvaSaits = new SuvaSaits({
-            userid, ...req.body
+            userId, ...req.body
         });
 
         await newSuvaSaits.save();
@@ -21,7 +21,7 @@ exports.createSuvaSaits = async (req, res) => {
 
 // Base function for updating and deleting an SuvaSaits
 async function modifySuvaSaits(req, res, action) {
-    const SuvaSaitsid = req.headers.suvasaitsid;
+    const SuvaSaitsid = req.params.suvasaitsid;
     try {
         const findSuvaSaits = await SuvaSaits.findById(SuvaSaitsid);
         if(!(findSuvaSaits.userId==req.user.id)){
@@ -60,7 +60,7 @@ exports.deleteSuvaSaits = (req, res) => modifySuvaSaits(req, res, async (SuvaSai
 // Endpoint for getting SuvaSaits data
 exports.getSuvaSaitsData = async (req, res) => {
     try {
-        const SuvaSaitsid = req.headers.suvasaitsid;
+        const SuvaSaitsid = req.params.suvasaitsid;
         const SuvaSaitsData = await SuvaSaits.findById(SuvaSaitsid);
 
         if (!SuvaSaitsData) {

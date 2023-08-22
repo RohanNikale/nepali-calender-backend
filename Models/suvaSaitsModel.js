@@ -9,13 +9,9 @@ const SuvaSaitsSchema = new mongoose.Schema({
     userName: {
         type: String
     },
-    pageTitleInNepali: {
-        type: String,
-        // required: [true, 'Please enter a title in Nepali '],
-    },
-    pageTitleInEnglish: {
-        type: String,
-        // required: [true, 'Please enter a title in English'],
+    pageTitle:{
+        nepali: {type:String},
+        english: {type:String}
     },
     saitListings: {
         type: Array

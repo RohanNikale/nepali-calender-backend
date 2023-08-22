@@ -7,12 +7,12 @@ const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
 router.post('/createsuvasaits', isAuthenticatedAdmin, createSuvaSaits);
 
 // Update SuvaSaits
-router.put('/updatesuvasaits', isAuthenticatedAdmin, updateSuvaSaits);
+router.put('/updatesuvasaits/:suvasaitsid', isAuthenticatedAdmin, updateSuvaSaits);
 
 // Delete SuvaSaits
-router.delete('/deletesuvasaits', isAuthenticatedAdmin, deleteSuvaSaits);
+router.delete('/deletesuvasaits/:suvasaitsid', isAuthenticatedAdmin, deleteSuvaSaits);
 
 // Read SuvaSaits
-router.get('/getsuvasaitsdata', getSuvaSaitsData);
+router.get('/getsuvasaitsdata/:suvasaitsid', getSuvaSaitsData);
 
 module.exports = router;
