@@ -11,7 +11,7 @@ exports.createHoroscope = [
             const newHoroscope = new Horoscope({
                 userId,
                 ...req.body,
-                fetureImg: `\\${req.file.path}`
+                // fetureImg: `\\${req.file.path}`
             });
 
             await newHoroscope.save();
