@@ -2,41 +2,44 @@ const mongoose = require('mongoose');
 
 // Create a Mongoose schema
 const productSchema = new mongoose.Schema({
-  productName: {
-    type: String,
-    required: true
-  },
-  productTitle: {
-    nepali: {
-      type: String,
-      required: true
+    companyId: {
+        type: String,
+        required: [true, 'Please provide valid Token']
     },
-    english: {
-      type: String,
-      required: true
-    }
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  productMedia: {
+    productName: {
+        type: String,
+        required: [true, 'Please enter a name']
+    },
+    productTitle: {
+        type: String,
+        required: [true, 'Please enter a title']
+    },
+    description: {
+        type: String,
+    },
+    productMedia: {
+        Productimages: { type: Object }
+    },
     YTvideoLink: {
-      type: String
+        type: String,
     },
-    images: {
-      type: Object
+    TikTokvideoLink: {
+        type: String,
+    },
+    websiteLink: {
+        type: String
+    },
+    productPrice: {
+
+        type:Object
+    },
+    phoneNumber: {
+        type: String,
+        required: true
+
     }
-  },
-  productPrice: {
-    type: Number,
-    required: true
-  },
-  phoneNumber: {
-    type: String,
-    required: true
-  }
-});
+}
+);
 
 // Create a Mongoose model
 const Product = mongoose.model('Product', productSchema);

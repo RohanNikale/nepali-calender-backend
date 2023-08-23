@@ -1,25 +1,31 @@
-const Product = require('../Models/productModel'); // Import the Product model
+const Product = require('../Models/productModel');
 const upload = require('../Config/multerSetup');
 
 // Endpoint for creating a new product
 exports.createProduct = [
-    upload.array('images'), // Use `array` for uploading multiple images
+    upload.array('Productimages'),
     async (req, res) => {
         try {
+            if(!req.user.companyId){
+                return res.status(404).json({
+                    status:false,
+                    message:'please create company first'
+                })
+            }
             const imagesArray = req.files.map(file => file.path);
-
+            console.log(req.body.YTvideoLink)
             const newProduct = new Product({
-                productMedia: {
-                    images: imagesArray,
-                    YTvideoLink: req.body.YTvideoLink
-                },
+                companyId: req.user.companyId,
                 productName: req.body.productName,
-                productTitle: {
-                    nepali: req.body.productTitle.nepali,
-                    english: req.body.productTitle.english
-                },
+                productTitle: req.body.productTitle,
                 description: req.body.description,
-                productPrice: req.body.productPrice,
+                productMedia: {
+                    Productimages: imagesArray
+                },
+                YTvideoLink: req.body.YTvideoLink,
+                TikTokvideoLink: req.body.TikTokvideoLink,
+                websiteLink: req.body.websiteLink,
+                productPrice:req.body.productPrice,
                 phoneNumber: req.body.phoneNumber
             });
 
@@ -30,28 +36,30 @@ exports.createProduct = [
                 status: true
             });
         } catch (error) {
+            console.log("Error in createProduct", error);
             res.status(500).json(error);
         }
     }
 ];
 
+// Base function for updating and deleting a product
 async function modifyProduct(req, res, action) {
-    const productid = req.params.productid;
+    const productId = req.params.productid;
     try {
-        const findproduct = await product.findById(productid);
-        if (!findproduct) {
-            return res.status(404).json({ status: false, message: 'product not found' });
+        const findProduct = await Product.findById(productId);
+        if (!findProduct) {
+            return res.status(404).json({ status: false, message: 'Product not found' });
         }
 
-        const result = await action(productid, req.body);
+        const result = await action(productId, req.body);
 
         if (!result) {
-            return res.status(404).json({ status: false, message: 'product not found' });
+            return res.status(404).json({ status: false, message: 'Product not found' });
         }
 
         res.status(200).json({ status: true, message: 'Operation successful', result });
     } catch (error) {
-        console.log(error)
+        console.log(error);
         res.status(500).json({ status: false, message: 'An error occurred', error });
     }
 }
@@ -69,13 +77,13 @@ exports.deleteProduct = (req, res) => modifyProduct(req, res, async (productId) 
 // Endpoint for getting product data
 exports.getProductData = async (req, res) => {
     try {
-        const productid = req.params.productid;
+        const productId = req.params.productid;
 
-        if (!productid) {
-            return res.status(400).json({ status: false, message: 'product id are required' });
+        if (!productId) {
+            return res.status(400).json({ status: false, message: 'product Id are required' });
         }
 
-        const ProductData = await Product.findById(productid);
+        const ProductData = await Product.findById(productId);
 
         if (!ProductData) {
             return res.status(404).json({ status: false, message: 'Product data not found' });

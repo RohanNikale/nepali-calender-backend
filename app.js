@@ -25,6 +25,7 @@ const SuvaSaitsRoutes = require("./routes/suvaSaitsRoutes");
 const CategoryRoutes = require("./routes/categoryRoutes");
 const businessRoutes = require("./routes/businessRoutes");
 const advertisementRoutes = require("./routes/advertisementRoutes");
+const productRoutes = require("./routes/productRoutes");
 const path = require('path');
 
 
@@ -49,6 +50,8 @@ app.use("/business", businessRoutes);
 app.use("/advertisement", advertisementRoutes);
 
 app.use('/category',CategoryRoutes)
+
+app.use('/product',productRoutes)
 
 
 // Error Middleware
