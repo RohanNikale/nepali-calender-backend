@@ -23,6 +23,8 @@ const adminEventRoutes = require("./routes/adminEventRoutes");
 const horoScopeRoutes = require("./routes/horoScopeRoutes");
 const SuvaSaitsRoutes = require("./routes/suvaSaitsRoutes");
 const CategoryRoutes = require("./routes/categoryRoutes");
+const menuRoutes = require("./routes/menuRoutes");
+const subMenuRoutes = require("./routes/subMenuRoutes");
 const businessRoutes = require("./routes/businessRoutes");
 const advertisementRoutes = require("./routes/advertisementRoutes");
 const productRoutes = require("./routes/productRoutes");
@@ -47,11 +49,15 @@ app.use("/horoscope", horoScopeRoutes);
 
 app.use("/business", businessRoutes);
 
-app.use("/advertisement", advertisementRoutes);
-
 app.use('/category',CategoryRoutes)
 
 app.use('/product',productRoutes)
+
+app.use('/advertisement',advertisementRoutes)
+
+app.use('/menu',menuRoutes)
+
+app.use('/submenu',subMenuRoutes)
 
 
 // Error Middleware
