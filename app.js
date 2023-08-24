@@ -28,6 +28,7 @@ const subMenuRoutes = require("./routes/subMenuRoutes");
 const businessRoutes = require("./routes/businessRoutes");
 const advertisementRoutes = require("./routes/advertisementRoutes");
 const productRoutes = require("./routes/productRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 const path = require('path');
 
 
@@ -58,6 +59,8 @@ app.use('/advertisement',advertisementRoutes)
 app.use('/menu',menuRoutes)
 
 app.use('/submenu',subMenuRoutes)
+
+app.use('/comment',commentRoutes)
 
 
 // Error Middleware
