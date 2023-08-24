@@ -8,7 +8,7 @@ exports.createRashifal = [
         try {
             const newRashifal = new Rashifal(
                 {
-                //  audioFile: `${req.file.path},`
+                 audioFile: `${req.file.path}`,
                  ...req.body });
 
             await newRashifal.save();
