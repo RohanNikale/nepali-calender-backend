@@ -28,7 +28,6 @@ async function modifyRashifal(req, res, action) {
     const rashifalId = req.params.rashifalid;
     try {
         const findRashifal = await Rashifal.findById(rashifalId);
-        console.log(req.body);
         if (!findRashifal) {
             return res.status(404).json({ status: false, message: 'Rashifal not found' });
         }
@@ -59,19 +58,32 @@ exports.deleteRashifal = (req, res) => modifyRashifal(req, res, async (rashifalI
 // Endpoint for getting Rashifal data
 exports.getRashifalData = async (req, res) => {
     try {
-        const { horoscopeName, rashifalType } = req.body;
+        const rashifalId = req.params.rashifalid;
 
-        if (!horoscopeName || !rashifalType) {
+        if (!rashifalId) {
             return res.status(400).json({ status: false, message: 'horoscopeName and rashifalType are required' });
         }
-        console.log(req.body)
-        const RashifalData = await Rashifal.findOne(req.body);
-        console.log(RashifalData);
+        const RashifalData = await Rashifal.findById(rashifalId);
         if (!RashifalData) {
             return res.status(404).json({ status: false, message: 'Rashifal data not found' });
         }
 
         res.status(200).json({ status: true, RashifalData });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ status: false, message: 'An error occurred', error });
+    }
+};
+
+exports.getRashifalList = async (req, res) => {
+    try {
+
+        const RashifalLIst = await Rashifal.find();
+        if (!RashifalLIst) {
+            return res.status(404).json({ status: false, message: 'Rashifal"s data not found' });
+        }
+
+        res.status(200).json({ status: true, RashifalLIst });
     } catch (error) {
         console.log(error);
         res.status(500).json({ status: false, message: 'An error occurred', error });
