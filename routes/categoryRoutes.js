@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createCategory, updateCategory, deleteCategory, getCategoryData } = require('../Controller/categoryController');
+const { createCategory, updateCategory, deleteCategory, getCategoryData, getCategoryList } = require('../Controller/categoryController');
 const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
 
 // Create Event
@@ -14,5 +14,7 @@ router.delete('/deletecategory/:categoryid', isAuthenticatedAdmin, deleteCategor
 
 // Read Event
 router.get('/getcategorydata/:categoryid', getCategoryData);
+
+router.get('/getCategoryList', getCategoryList);
 
 module.exports = router;

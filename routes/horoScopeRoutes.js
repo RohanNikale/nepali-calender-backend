@@ -9,6 +9,7 @@ const {
     updateHoroscope,
     deleteHoroscope,
     getHoroscopeData,
+    getHoroscopeList
 } = require("../Controller/horoScopeController.js");
 
 const {
@@ -30,6 +31,8 @@ router.delete("/deletehoroscope/:horoscopeid",isAuthenticatedAdmin, deleteHorosc
 
 // Get horoscope data
 router.get("/gethoroscope/:horoscopeid", getHoroscopeData);
+
+router.get("/gethoroscopeList", getHoroscopeList);
 
 
 
