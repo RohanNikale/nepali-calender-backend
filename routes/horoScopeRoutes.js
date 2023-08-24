@@ -16,6 +16,7 @@ const {
     updateRashifal,
     deleteRashifal,
     getRashifalData,
+    getRashifalList
 } = require("../Controller/rashifalController");
 
 // Create a new horoscope
@@ -46,5 +47,8 @@ router.delete('/deleteRashifal/:rashifalid', isAuthenticatedAdmin, deleteRashifa
 
 // Read Rashifal
 router.get('/getRashifaldata/:rashifalid', getRashifalData);
+
+// rahsifal list
+router.get('/getRashifallist', getRashifalList);
 
 module.exports = router;

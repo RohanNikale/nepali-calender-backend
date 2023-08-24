@@ -47,6 +47,8 @@ app.use("/horoscope", horoScopeRoutes);
 
 app.use("/business", businessRoutes);
 
+app.use("/business", businessRoutes);
+
 app.use('/category',CategoryRoutes)
 
 app.use('/menu',menuRoutes)
