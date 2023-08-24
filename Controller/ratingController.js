@@ -3,8 +3,13 @@ const Rating = require('../Models/ratingModel');
 // Create Rating
 exports.createRating = async (req, res) => {
   try {
+    const productid=req.body.productId
+    if(!productid){
+      return res.status(404).json({status:false,message:'please provide productid in params'})
+    }
     const newRating = new Rating(
         {
+          productId:productid,
             userId:req.user.id,
             ...req.body
         }
