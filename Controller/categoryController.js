@@ -76,3 +76,18 @@ exports.getCategoryData = async (req, res) => {
         res.status(500).json({ status: false, message: 'An error occurred', error });
     }
 };
+
+exports.getCategoryList= async (req, res) => {
+    try {
+  
+        const categoris = await Category.find();
+
+        if (!categoris) {
+            return res.status(404).json({ status: false, message: 'categoris not found' });
+        }
+
+        res.status(200).json({ status: true, categoris });
+    } catch (error) {
+        res.status(500).json({ status: false, message: 'An error occurred', error });
+    }
+};

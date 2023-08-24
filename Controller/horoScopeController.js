@@ -93,3 +93,19 @@ exports.getHoroscopeData = async (req, res) => {
         res.status(500).json({ status: false, message: 'An error occurred' });
     }
 };
+
+exports.getHoroscopeList = async (req, res) => {
+
+    try {
+        const horoscope = await Horoscope.find();
+
+        if (!horoscope) {
+            return res.status(404).json({ status: false, message: 'Horoscope not found' });
+        }
+
+        res.status(200).json({ status: true, horoscope });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ status: false, message: 'An error occurred' });
+    }
+};
