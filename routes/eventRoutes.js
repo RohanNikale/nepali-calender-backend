@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createEvent, updateEvent, deleteEvent, getEventData } = require('../Controller/eventController');
+const { createEvent, updateEvent, deleteEvent, getEventData, getEventList } = require('../Controller/eventController');
 const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
 
 // Create Event
@@ -14,5 +14,7 @@ router.delete('/deleteevent/:eventid', isAuthenticatedAdmin, deleteEvent);
 
 // Read Event
 router.get('/geteventdata/:eventid', getEventData);
+
+router.get('/geteventList', getEventList);
 
 module.exports = router;

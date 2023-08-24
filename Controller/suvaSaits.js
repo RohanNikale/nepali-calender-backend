@@ -73,3 +73,18 @@ exports.getSuvaSaitsData = async (req, res) => {
         res.status(500).json({ status: false, message: 'An error occurred' });
     }
 };
+
+exports.getSuvaSaitsList = async (req, res) => {
+    try {
+        const SuvaSaitsList = await SuvaSaits.find();
+
+        if (!SuvaSaitsList) {
+            return res.status(404).json({ status: false, message: 'SuvaSaits not found' });
+        }
+
+        res.status(200).json({ status: true, SuvaSaitsList });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ status: false, message: 'An error occurred' });
+    }
+};
