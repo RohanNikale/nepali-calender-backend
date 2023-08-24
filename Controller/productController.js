@@ -95,3 +95,19 @@ exports.getProductData = async (req, res) => {
         res.status(500).json({ status: false, message: 'An error occurred', error });
     }
 };
+
+exports.getProductList = async (req, res) => {
+    try {
+
+        const ProductList = await Product.find();
+
+        if (!ProductList) {
+            return res.status(404).json({ status: false, message: 'Products data not found' });
+        }
+
+        res.status(200).json({ status: true, ProductList });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ status: false, message: 'An error occurred', error });
+    }
+};
