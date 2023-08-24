@@ -23,8 +23,12 @@ const adminEventRoutes = require("./routes/adminEventRoutes");
 const horoScopeRoutes = require("./routes/horoScopeRoutes");
 const SuvaSaitsRoutes = require("./routes/suvaSaitsRoutes");
 const CategoryRoutes = require("./routes/categoryRoutes");
+<<<<<<< HEAD
 const menuRoutes = require("./routes/menuRoutes");
 const subMenuRoutes = require("./routes/subMenuRoutes");
+=======
+const businessRoutes = require("./routes/businessRoutes");
+>>>>>>> 080562a1b948d4a709eb2ed3848ff644c4873d91
 const path = require('path');
 
 
@@ -43,6 +47,8 @@ app.use("/admin/event", adminEventRoutes);
 app.use("/suvasaits", SuvaSaitsRoutes);
 
 app.use("/horoscope", horoScopeRoutes);
+
+app.use("/business", businessRoutes);
 
 app.use('/category',CategoryRoutes)
 
