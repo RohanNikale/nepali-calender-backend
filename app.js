@@ -26,6 +26,8 @@ const CategoryRoutes = require("./routes/categoryRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const subMenuRoutes = require("./routes/subMenuRoutes");
 const businessRoutes = require("./routes/businessRoutes");
+const advertisementRoutes = require("./routes/advertisementRoutes");
+const productRoutes = require("./routes/productRoutes");
 const path = require('path');
 
 
