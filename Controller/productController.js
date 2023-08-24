@@ -1,21 +1,22 @@
 const Product = require('../Models/productModel');
 const upload = require('../Config/multerSetup');
-
+const business =require('../Models/businessModel')
 // Endpoint for creating a new product
 exports.createProduct = [
     upload.array('Productimages'),
     async (req, res) => {
         try {
-            if(!req.user.companyId){
+            const findBusiness=await business.findOne({userId:req.user.id})
+            if(!findBusiness){
                 return res.status(404).json({
                     status:false,
                     message:'please create company first'
                 })
             }
             const imagesArray = req.files.map(file => file.path);
-            console.log(req.body.YTvideoLink)
             const newProduct = new Product({
-                companyId: req.user.companyId,
+                companyId: findBusiness.id,
+                userId:findBusiness.userId,
                 productName: req.body.productName,
                 productTitle: req.body.productTitle,
                 description: req.body.description,
@@ -47,10 +48,13 @@ async function modifyProduct(req, res, action) {
     const productId = req.params.productid;
     try {
         const findProduct = await Product.findById(productId);
+        
         if (!findProduct) {
             return res.status(404).json({ status: false, message: 'Product not found' });
         }
-
+        if(!(req.user.id===findProduct.userId)){
+            return res.status(404).json({status:false,message:'please login fist'})
+        }
         const result = await action(productId, req.body);
 
         if (!result) {

@@ -64,9 +64,6 @@ const userSchema = new mongoose.Schema(
       type: Date,
       // 10 minutes
     },
-    profilePhoto: {
-      type: String,
-    },
     relationshipStatus: {
       type: String,
       enum: ["unmarried", "married"],

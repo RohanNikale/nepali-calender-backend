@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createSuvaSaits, updateSuvaSaits, deleteSuvaSaits, getSuvaSaitsData } = require('../Controller/suvaSaits');
+const { createSuvaSaits, updateSuvaSaits, deleteSuvaSaits, getSuvaSaitsData, getSuvaSaitsList } = require('../Controller/suvaSaits');
 const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
 
 // Create SuvaSaits
@@ -14,5 +14,7 @@ router.delete('/deletesuvasaits/:suvasaitsid', isAuthenticatedAdmin, deleteSuvaS
 
 // Read SuvaSaits
 router.get('/getsuvasaitsdata/:suvasaitsid', getSuvaSaitsData);
+
+router.get('/getsuvasaitsList', getSuvaSaitsList);
 
 module.exports = router;

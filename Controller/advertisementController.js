@@ -80,3 +80,19 @@ exports.getAdvertisementData = async (req, res) => {
         res.status(500).json({ status: false, message: 'An error occurred', error });
     }
 };
+
+exports.getAdvertisementList = async (req, res) => {
+    try {
+
+        const AdvertisementData = await Advertisement.find({accept:true,status:'active'});
+
+        if (!AdvertisementData) {
+            return res.status(404).json({ status: false, message: 'Advertisements data not found' });
+        }
+
+        res.status(200).json({ status: true, AdvertisementData });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ status: false, message: 'An error occurred', error });
+    }
+};
