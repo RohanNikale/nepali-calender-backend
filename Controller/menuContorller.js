@@ -32,7 +32,7 @@ exports.createMenu = async (req, res) => {
     }
 };
 
-exports.getMenuData = async (req, res) => {
+exports.getMenuList = async (req, res) => {
     try {
         const menus = await Menu.find();
 

@@ -29,9 +29,8 @@ exports.createSubMenu = async (req, res) => {
     }
 };
 
-exports.getSubMenuAllData = async (req, res) => {
+exports.getSubMenuList = async (req, res) => {
     try {
-        const subMenuId = req.params.parentsubmenuid;
         const subMenus = await SubMenu.find();
 
         res.status(200).json({ status: true, subMenus });

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createAdvertisement, updateAdvertisement, deleteAdvertisement, getAdvertisementData } = require('../Controller/advertisementController');
+const { createAdvertisement, updateAdvertisement, deleteAdvertisement, getAdvertisementData,getAdvertisementList } = require('../Controller/advertisementController');
 const { isAuthenticatedUser } = require('../Middleware/auth');
 const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
 
@@ -14,6 +14,8 @@ router.put('/updateAdvertisement/:advertisementid', isAuthenticatedAdmin, update
 router.delete('/deleteAdvertisement/:advertisementid', isAuthenticatedAdmin, deleteAdvertisement);
 
 // Read Advertisement
-router.get('/getAdvertisementData/:advertisementid', isAuthenticatedAdmin);
+router.get('/getAdvertisementData/:advertisementid', isAuthenticatedAdmin,getAdvertisementData);
+
+router.get('/getAdvertisementList',getAdvertisementList);
 
 module.exports = router;

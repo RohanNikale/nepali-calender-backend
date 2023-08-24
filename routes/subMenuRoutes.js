@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createSubMenu, updateSubMenu, deleteSubMenu, getSubMenuAllData } = require('../Controller/subMenuController'); // Adjust the path as needed
+const { createSubMenu, updateSubMenu, deleteSubMenu, getSubMenuList } = require('../Controller/subMenuController'); // Adjust the path as needed
 
 // Create SubMenu
 router.post('/createSubMenu', createSubMenu);
@@ -12,6 +12,6 @@ router.put('/updateSubMenu/:submenuid', updateSubMenu);
 router.delete('/deleteSubMenu/:submenuid', deleteSubMenu);
 
 // Read SubMenu
-router.get('/getSubMenuAllData/:parentsubmenuid', getSubMenuAllData);
+router.get('/getSubMenuList/:parentsubmenuid', getSubMenuList);
 
 module.exports = router;
