@@ -39,8 +39,6 @@ exports.SignUpLoginByOtp = async (req, res, next) => {
         // Send the OTP here
         // sendOtp(number, otp);
 
-        console.log({ otp });
-
         res.status(201).json({
             message: "The 5-digit OTP has been sent to your phone number",
             status: true,

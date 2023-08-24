@@ -27,12 +27,16 @@ async function modifyBusiness(req, res, action) {
     try {
         const findBusiness = await Business.findById(businessId);
 
+        if(!(req.user.id===findBusiness.userId)){
+            return res.status(404).json({
+                success: false,
+                message: 'Access denied.',
+            })
+        }
         if (!findBusiness) {
             return res.status(404).json({ status: false, message: 'Business not found' });
         }
-
-        const result = await action(businessId, req.body);
-
+        const result = await action(businessId, req.body);        
         if (!result) {
             return res.status(404).json({ status: false, message: 'Business not found' });
         }
