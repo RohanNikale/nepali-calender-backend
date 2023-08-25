@@ -18,6 +18,5 @@ function sendOtp(recipientPhoneNumber,otp) {
     });
 }
 
-// Example usage
 
 module.exports = sendOtp;
