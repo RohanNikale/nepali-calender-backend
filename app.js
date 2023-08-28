@@ -6,6 +6,11 @@ dotenv.config({ path: "./Config/config.env" });
 
 const bodyParser = require("body-parser");
 
+const compression=require('compression')
+
+app.use(compression());
+
+
 // Middlewares
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
