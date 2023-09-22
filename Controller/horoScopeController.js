@@ -1,4 +1,4 @@
-const Horoscope = require('../Models/horoscopeModel');
+const Horoscope = require('../models/horoscopeModel');
 const upload = require('../Config/multerSetup');
 
 // Endpoint for creating a new horoscope with image upload

@@ -1,4 +1,4 @@
-const SubMenu = require('../Models/subMenuModel'); // Import the SubMenu model
+const SubMenu = require('../models/subMenuModel'); // Import the SubMenu model
 
 async function modifySubMenu(res, action) {
     try {

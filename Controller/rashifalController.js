@@ -1,4 +1,4 @@
-const Rashifal = require('../Models/rashiFalHoroscope'); // Import the Rashifal model
+const Rashifal = require('../models/rashiFalHoroscope'); // Import the Rashifal model
 const upload = require('../Config/multerSetup');
 
 // Endpoint for creating a new Rashifal
