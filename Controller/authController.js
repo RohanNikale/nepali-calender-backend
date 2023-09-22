@@ -1,8 +1,8 @@
 const User = require("../Models/userModel");
 const bcrypt = require("bcryptjs");
-const sendToken = require("../utils/jwtToken");
-const sendOtp = require("../utils/sendOtp");
-const generateOtp = require("../utils/generateOtp");
+const sendToken = require("../Utils/jwtToken");
+const sendOtp = require("../Utils/sendOtp");
+const generateOtp = require("../Utils/generateOtp");
 
 
 exports.SignUpLoginByOtp = async (req, res, next) => {
