@@ -13,7 +13,7 @@ exports.createProduct = [
                     message:'please create company first'
                 })
             }
-            const imagesArray = req.files.map(file => file.path);
+            // const imagesArray = req.files.map(file => file.path);
             const newProduct = new Product({
                 companyId: findBusiness.id,
                 userId:findBusiness.userId,
@@ -21,7 +21,7 @@ exports.createProduct = [
                 productTitle: req.body.productTitle,
                 description: req.body.description,
                 productMedia: {
-                    Productimages: imagesArray
+                    // Productimages: imagesArray
                 },
                 YTvideoLink: req.body.YTvideoLink,
                 TikTokvideoLink: req.body.TikTokvideoLink,

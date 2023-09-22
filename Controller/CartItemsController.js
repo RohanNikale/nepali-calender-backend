@@ -2,22 +2,35 @@ const CartItem = require('../Models/cartItemModel');
 
 exports.addItemToCart = async (req, res) => {
   try {
-    const { productId, quantity } = req.body;
-    const check=await cartItem.find(productId)
-    if(check){
-      cartItem.quantity = quantity;
-      await cartItem.save();
-      return res.status(200).json({status:true,message:"Item added to cart"})
-    }
-    const cartItem = new CartItem({ userId:req.user.id ,productId, quantity });
-    await cartItem.save();
+    const { product, quantity } = req.body;
+    
+    // Check if the product is already in the cart
+    const existingCartItem = await CartItem.findOne({ userId: req.user.id, product });
+    
+    if (existingCartItem) {
+      // If the product is already in the cart, update its quantity
+      existingCartItem.quantity += quantity;
+      await existingCartItem.save();
 
-    res.status(201).json({
-      message: 'Item added to cart',
-      status: true,
-      cartItem
-    });
+      return res.status(200).json({
+        message: 'Item quantity updated in cart',
+        status: true,
+        cartItem: existingCartItem
+      });
+    } else {
+      // If the product is not in the cart, add it as a new cart item
+      const cartItem = new CartItem({ userId: req.user.id, product, quantity });
+      await cartItem.save();
+
+      return res.status(201).json({
+        message: 'Item added to cart',
+        status: true,
+        cartItem
+      });
+    }
   } catch (error) {
+    
+    console.log(error);
     res.status(500).json({ status: false, message: 'An error occurred', error });
   }
 };

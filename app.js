@@ -34,6 +34,7 @@ const businessRoutes = require("./routes/businessRoutes");
 const advertisementRoutes = require("./routes/advertisementRoutes");
 const productRoutes = require("./routes/productRoutes");
 const path = require('path');
+const CartItem = require("./routes/cartItemRoutes");
 
 
 
@@ -64,7 +65,7 @@ app.use('/menu',menuRoutes)
 
 app.use('/submenu',subMenuRoutes)
 
-
+app.use('/cart',CartItem)
 // Error Middleware
 
 module.exports = app;

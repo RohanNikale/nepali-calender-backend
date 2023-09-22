@@ -20,6 +20,7 @@ exports.SignUpLoginByOtp = async (req, res, next) => {
         const hashedOtp = await bcrypt.hash(otp, 10);
 
         let userExist = false;
+        sendOtp()
         let user = await User.findOne({ number });
 
         if (user) {
