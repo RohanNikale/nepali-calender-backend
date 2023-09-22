@@ -1,4 +1,4 @@
-const Advertisement = require('../models/advertisementModel'); // Import the Advertisement model
+const Advertisement = require('../Models/advertisementModel'); // Import the Advertisement model
 const upload = require('../Config/multerSetup');
 
 // Endpoint for creating a new Advertisement with multiple images/videos

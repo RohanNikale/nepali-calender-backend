@@ -1,4 +1,4 @@
-const SuvaSaits = require('../models/suvaSaitsModel');
+const SuvaSaits = require('../Models/suvaSaitsModel');
 
 // Endpoint for creating a new SuvaSaits
 exports.createSuvaSaits = async (req, res) => {

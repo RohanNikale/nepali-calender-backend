@@ -1,5 +1,5 @@
 // controllers/menuController.js
-const Menu = require('../models/menuModel');
+const Menu = require('../Models/menuModel');
 
 async function modifyMenu(res, action) {
     try {

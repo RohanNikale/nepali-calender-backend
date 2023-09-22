@@ -1,4 +1,4 @@
-const User=require('../models/userModel')
+const User=require('../Models/userModel')
 // User CRUD
 
 // update User by Id

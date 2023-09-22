@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Business = require('../models/businessModel');
+const Business = require('../Models/businessModel');
 
 // Endpoint for creating a new business
 exports.createBusiness = async (req, res) => {

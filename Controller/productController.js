@@ -1,6 +1,6 @@
-const Product = require('../models/productModel');
+const Product = require('../Models/productModel');
 const upload = require('../Config/multerSetup');
-const business =require('../models/businessModel')
+const business =require('../Models/businessModel')
 // Endpoint for creating a new product
 exports.createProduct = [
     upload.array('Productimages'),
