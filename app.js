@@ -66,11 +66,8 @@ app.use('/product',productRoutes)
 
 app.use('/advertisement',advertisementRoutes)
 
-<<<<<<< HEAD
-=======
 app.use('/rating',ratingRoutes)
 
->>>>>>> Rating-CRUD
 app.use('/menu',menuRoutes)
 
 app.use('/submenu',subMenuRoutes)
