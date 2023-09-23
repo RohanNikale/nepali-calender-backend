@@ -12,7 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Default route
 app.get("/", (req, res) => {
-  res.send("Hello, world!");
+  res.json({
+    message : "Welcome to the API of nepali calender",
+  })
 });
 
 // Route imports
