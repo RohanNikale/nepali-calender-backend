@@ -39,10 +39,14 @@ exports.SignUpLoginByOtp = async (req, res, next) => {
 
         // Send the OTP here
 <<<<<<< HEAD
+<<<<<<< HEAD
         sendOtp(number, otp);
 =======
         // sendOtp(number, otp);
 >>>>>>> Rating-CRUD
+=======
+        sendOtp(number, otp);
+>>>>>>> Twilio-OTP-Provider
 
         res.status(201).json({
             message: "The 5-digit OTP has been sent to your phone number",

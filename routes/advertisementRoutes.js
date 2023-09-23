@@ -11,7 +11,7 @@ router.post('/createAdvertisement', isAuthenticatedUser, createAdvertisement);
 router.put('/updateAdvertisement/:advertisementid', isAuthenticatedAdmin, updateAdvertisement);
 
 // Delete Advertisement
-router.delete('/deleteAdvertisement/:advertisementid', isAuthenticatedAdmin, deleteAdvertisement);
+router.delete('/deleteAdvertisement/:advertisementid', isAuthenticatedUser, deleteAdvertisement);
 
 // Read Advertisement
 router.get('/getAdvertisementData/:advertisementid', isAuthenticatedAdmin,getAdvertisementData);
