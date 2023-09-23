@@ -7,7 +7,7 @@ const { updateUser,getUserInfoById } = require('../Controller/userController');
 router.put("/updateuser",isAuthenticatedUser, updateUser);
 
 // Get user Route
-router.get("/getuser", getUserInfoById);
+router.get("/getuser",isAuthenticatedUser, getUserInfoById);
 
 
 module.exports = router;

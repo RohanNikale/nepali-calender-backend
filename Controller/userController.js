@@ -36,10 +36,7 @@ exports.updateUser = async (req, res) => {
 // Get user info by user ID
 exports.getUserInfoById = async (req, res) => {
     try {
-        const userId=req.headers.userid
-        const user = await User.findById(userId);
-
-        if (!user) {
+        if (!req.user) {
             return res.status(401).json({
                 success:false,
                 message:'User not found'
@@ -49,7 +46,7 @@ exports.getUserInfoById = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: 'successfully',
-            user,
+            user:req.user,
         })
         
     } catch (error) {
