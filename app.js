@@ -36,6 +36,8 @@ const businessRoutes = require("./routes/businessRoutes");
 const ratingRoutes = require('./routes/ratingRoutes'); 
 const advertisementRoutes = require("./routes/advertisementRoutes");
 const productRoutes = require("./routes/productRoutes");
+const commentRoutes = require("./routes/commentRoutes");
+const replayRoutes = require("./routes/replayRoutes");
 const path = require('path');
 const CartItem = require("./routes/cartItemRoutes");
 
