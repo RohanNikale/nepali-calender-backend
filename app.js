@@ -33,6 +33,7 @@ const CategoryRoutes = require("./routes/categoryRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const subMenuRoutes = require("./routes/subMenuRoutes");
 const businessRoutes = require("./routes/businessRoutes");
+const ratingRoutes = require('./routes/ratingRoutes'); 
 const advertisementRoutes = require("./routes/advertisementRoutes");
 const productRoutes = require("./routes/productRoutes");
 const path = require('path');
@@ -63,6 +64,11 @@ app.use('/product',productRoutes)
 
 app.use('/advertisement',advertisementRoutes)
 
+<<<<<<< HEAD
+=======
+app.use('/rating',ratingRoutes)
+
+>>>>>>> Rating-CRUD
 app.use('/menu',menuRoutes)
 
 app.use('/submenu',subMenuRoutes)
