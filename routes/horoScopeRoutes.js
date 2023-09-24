@@ -19,7 +19,7 @@ router.delete("/deletehoroscope/:horoscopeid",isAuthenticatedAdmin, deleteHorosc
 // Get horoscope data
 router.get("/gethoroscope/:horoscopeid", getHoroscopeData);
 
-router.get("/gethoroscopeList", getHoroscopeList);
+router.get("/gethoroscopeList/:type", getHoroscopeList);
 
 
 module.exports = router;

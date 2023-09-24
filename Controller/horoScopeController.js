@@ -93,7 +93,6 @@ exports.updateHoroscope = async (req, res) => {
         }
 
         const updatedHoroscope = await Horoscope.findByIdAndUpdate(horoscopeId, req.body, { new: true });
-
         if (!updatedHoroscope) {
             return res.status(404).json({ status: false, message: 'Horoscope not found' });
         }
@@ -145,9 +144,9 @@ exports.getHoroscopeData = async (req, res) => {
 };
 
 exports.getHoroscopeList = async (req, res) => {
-
+    const type = req.params.type;
     try {
-        const horoscope = await Horoscope.find();
+        const horoscope = await Horoscope.find({horoscopeDisplay:type});
 
         if (!horoscope) {
             return res.status(404).json({ status: false, message: 'Horoscope not found' });
