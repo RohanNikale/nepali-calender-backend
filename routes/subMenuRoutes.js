@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { createSubMenu, updateSubMenu, deleteSubMenu, getSubMenuList } = require('../Controller/subMenuController'); // Adjust the path as needed
-<<<<<<< HEAD
 const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
-=======
->>>>>>> Rating-CRUD
+
 
 // Create SubMenu
 router.post('/createSubMenu',isAuthenticatedAdmin, createSubMenu);

@@ -4,21 +4,8 @@ const { isAuthenticatedAdmin } = require('../Middleware/adminAuth');
 
 
 
-const {
-    createHoroscope,
-    updateHoroscope,
-    deleteHoroscope,
-    getHoroscopeData,
-    getHoroscopeList
-} = require("../Controller/horoScopeController.js");
+const {createHoroscope,updateHoroscope,deleteHoroscope,getHoroscopeData,getHoroscopeList} = require("../Controller/horoScopeController.js");
 
-const {
-    createRashifal,
-    updateRashifal,
-    deleteRashifal,
-    getRashifalData,
-    getRashifalList
-} = require("../Controller/rashifalController");
 
 // Create a new horoscope
 router.post("/createhoroscope",isAuthenticatedAdmin, createHoroscope);
@@ -34,24 +21,5 @@ router.get("/gethoroscope/:horoscopeid", getHoroscopeData);
 
 router.get("/gethoroscopeList", getHoroscopeList);
 
-
-
-
-// Rashifal 
-
-// Create Horoscope
-router.post('/addrashifal', isAuthenticatedAdmin, createRashifal);
-
-// Update Horoscope
-router.put('/updaterashifal/:rashifalid', isAuthenticatedAdmin, updateRashifal);
-
-// Delete Rashifal
-router.delete('/deleteRashifal/:rashifalid', isAuthenticatedAdmin, deleteRashifal);
-
-// Read Rashifal
-router.get('/getRashifaldata/:rashifalid', getRashifalData);
-
-// rahsifal list
-router.get('/getRashifallist', getRashifalList);
 
 module.exports = router;

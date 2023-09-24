@@ -13,11 +13,9 @@ exports.createProduct = [
                     message:'please create company first'
                 })
             }
-<<<<<<< HEAD
-            // const imagesArray = req.files.map(file => file.path);
-=======
+
             const imagesArray = req.files.map(file => file.path);
->>>>>>> Rating-CRUD
+
             const newProduct = new Product({
                 companyId: findBusiness.id,
                 userId:findBusiness.userId,

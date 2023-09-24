@@ -1,16 +1,20 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
+const cors = require('cors');
 const app = express();
 dotenv.config({ path: "./Config/config.env" });
 
 const bodyParser = require("body-parser");
+// Increase the JSON request body size limit (e.g., for larger JSON payloads)
+app.use(bodyParser.json({ limit: '70mb' }));
 
+// Increase the form data request body size limit (e.g., for larger file uploads)
+app.use(bodyParser.urlencoded({ limit: '70mb', extended: true }));
 const compression=require('compression')
 
 app.use(compression());
 
-
+app.use(cors());
 // Middlewares
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));

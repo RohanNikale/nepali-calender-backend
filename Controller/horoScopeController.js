@@ -1,17 +1,67 @@
 const Horoscope = require('../Models/horoScopeModel');
 const upload = require('../Config/multerSetup');
 
-// Endpoint for creating a new horoscope with image upload
+// Endpoint for creating a new horoscope with image and audio file uploads
 exports.createHoroscope = [
-    upload.single('fetureImg'),
+    upload.fields([
+        { name: 'fetureImg', maxCount: 1 },
+        { name: 'audioFile', maxCount: 1 }
+    ]),
     async (req, res) => {
         try {
+            const uploadedImage = req.files['fetureImg'] ? req.files['fetureImg'][0] : null;
+            const uploadedAudio = req.files['audioFile'] ? req.files['audioFile'][0] : null;
+            
             const userId = req.user.id;
 
             const newHoroscope = new Horoscope({
                 userId,
-                ...req.body,
-                fetureImg: `\\${req.file.path}`
+                pageTitle: {
+                    nepali: req.body.pageTitleNepali,
+                    english: req.body.pageTitle,
+                },
+                selectedHoroscope:req.body.selectedHoroscope,
+                horoscopeDisplay: req.body.horoscopeDisplay,
+                fetureImg: uploadedImage,
+                audioFile: uploadedAudio,
+                horoscopeVideoLink: req.body.horoscopeVideoLink,
+                startingLetter: {
+                    nepali: req.body.startingLetterNepali,
+                    english: req.body.startingLetter,
+                },
+                description: {
+                    nepali: req.body.description,
+                    english: req.body.descriptionNepali,
+                },
+                luckyNumber: {
+                    nepali: req.body.luckyNumber,
+                    english: req.body.luckyNumberNepali,
+                },
+                luckyColor: {
+                    nepali: req.body.luckyColor,
+                    english: req.body.luckyColorNepali,
+                },
+                luckyDays: {
+                    nepali: req.body.luckyDaysNepali,
+                    english: req.body.luckyDays,
+                },
+                luckyStone: {
+                    nepali: req.body.luckyStoneNepali,
+                    english: req.body.luckyStone,
+                },
+                rulingPlanet: {
+                    nepali: req.body.rulingPlanetNepali,
+                    english: req.body.rulingPlanet,
+                },
+                Symbol: {
+                    nepali: req.body.SymbolNepali,
+                    english: req.body.Symbol,
+                },
+                Element: {
+                    nepali: req.body.ElementNepali,
+                    english: req.body.Element,
+                },
+                luckyDetails: req.body.luckyDetails, // Corrected reference
             });
 
             await newHoroscope.save();
@@ -32,7 +82,7 @@ exports.updateHoroscope = async (req, res) => {
     const horoscopeId = req.params.horoscopeid;
     try {
         const findHoroscope = await Horoscope.findById(horoscopeId);
-        if (!(findHoroscope.userId == req.user.id)) {
+        if (!(req.user.adminAccess)) {
             return res.status(404).json({
                 success: false,
                 message: 'Access denied.',

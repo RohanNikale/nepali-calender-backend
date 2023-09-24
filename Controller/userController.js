@@ -53,3 +53,24 @@ exports.getUserInfoById = async (req, res) => {
         throw error;
     }
 };
+
+exports.getUserList = async (req, res) => {
+    try {
+        let users=await User.find().select("+email")
+        if (!users) {
+            return res.status(401).json({
+                success:false,
+                message:'User"s not found'
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: 'successfully',
+            user:users,
+        })
+        
+    } catch (error) {
+        res.json({message:"users not found"})
+    }
+};
