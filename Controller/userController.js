@@ -56,29 +56,21 @@ exports.getUserInfoById = async (req, res) => {
 
 exports.getUserList = async (req, res) => {
     try {
-        const page = parseInt(req.query.page) || 1; // Get the page number from the query parameter
-        const perPage = parseInt(req.query.perPage) || 10; // Number of users per page
-
-        const users = await User.find()
-            .select("+email")
-            .skip((page - 1) * perPage) // Skip users on previous pages
-            .limit(perPage); // Limit the number of users per page
-
-        if (!users || users.length === 0) {
-            return res.status(404).json({
-                success: false,
-                message: 'Users not found on this page',
+        let users=await User.find().select("+email")
+        if (!users) {
+            return res.status(401).json({
+                success:false,
+                message:'User"s not found'
             });
         }
 
         return res.status(200).json({
             success: true,
-            message: 'Successfully',
-            users: users,
-            currentPage: page,
-            totalPages: Math.ceil(await User.countDocuments() / perPage),
-        });
+            message: 'successfully',
+            user:users,
+        })
+        
     } catch (error) {
-        res.status(500).json({ message: "Internal Server Error" });
+        res.json({message:"users not found"})
     }
 };
