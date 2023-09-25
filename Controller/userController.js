@@ -74,3 +74,17 @@ exports.getUserList = async (req, res) => {
         res.json({message:"users not found"})
     }
 };
+exports.deleteUser=async(req,res)=>{
+    const userid=req.params.id
+    try{
+
+        let deletingUesr=await User.findByIdAndDelete(userid)
+        if(!deletingUesr){
+            return res.status(404).json({status:false,message:'user not found'})
+        }
+        return res.status(201).json({status:true,deletedUser:deletingUesr})
+    }
+    catch(error){
+        res.status(500).json(error)
+    }
+}

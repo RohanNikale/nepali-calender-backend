@@ -11,10 +11,10 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
     },
-    adminAccess:{
-      type : Boolean 
+    adminAccess: {
+      type: Boolean
 
-  },
+    },
     profilePic: {
       type: String,
     },
@@ -86,6 +86,7 @@ const userSchema = new mongoose.Schema(
     companies: {
       type: Object,
     },
+    password: String,
   },
   { timestamps: true }
 );
