@@ -1,4 +1,4 @@
-const Replay = require('../Models/ReplayModel');
+const Replay = require('../Models/replayModel');
 
 // Reusable function to modify a Replay
 const modifyReplay = async (req, res, action) => {
