@@ -23,8 +23,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Default route
 
 // Route imports
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get('/', (req, res) => {
+  res.send('welcome to nepali calender api')
 });
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
@@ -44,36 +44,42 @@ const replayRoutes = require("./routes/replayRoutes");
 const CartItem = require("./routes/cartItemRoutes");
 
 
+app.get('*', (req, res, next) => {
+  if (req.url.startsWith('/api')) {
+    return next();
+  }
+
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 
+app.use("/api/auth", authRoutes);
 
-app.use("/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
-app.use("/user", userRoutes);
+app.use("/api/event", eventRoutes);
 
-app.use("/event", eventRoutes);
+app.use("/api/admin/event", adminEventRoutes);
 
-app.use("/admin/event", adminEventRoutes);
+app.use("/api/suvasaits", SuvaSaitsRoutes);
 
-app.use("/suvasaits", SuvaSaitsRoutes);
+app.use("/api/horoscope", horoScopeRoutes);
 
-app.use("/horoscope", horoScopeRoutes);
+app.use("/api/business", businessRoutes);
 
-app.use("/business", businessRoutes);
+app.use('/api/category',CategoryRoutes)
 
-app.use('/category',CategoryRoutes)
+app.use('/api/product',productRoutes)
 
-app.use('/product',productRoutes)
+app.use('/api/advertisement',advertisementRoutes)
 
-app.use('/advertisement',advertisementRoutes)
+app.use('/api/rating',ratingRoutes)
 
-app.use('/rating',ratingRoutes)
+app.use('/api/menu',menuRoutes)
 
-app.use('/menu',menuRoutes)
+app.use('/api/submenu',subMenuRoutes)
 
-app.use('/submenu',subMenuRoutes)
-
-app.use('/cart',CartItem)
+app.use('/api/cart',CartItem)
 
 
 module.exports = app;
