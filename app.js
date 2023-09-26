@@ -2,8 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require('cors');
 const app = express();
+const path = require('path');
 dotenv.config({ path: "./Config/config.env" });
-
 const bodyParser = require("body-parser");
 // Increase the JSON request body size limit (e.g., for larger JSON payloads)
 app.use(bodyParser.json({ limit: '70mb' }));
@@ -18,15 +18,14 @@ app.use(cors());
 // Middlewares
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(express.static(path.join(__dirname, 'build')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Default route
-app.get("/", (req, res) => {
-  res.json({
-    message : "Welcome to the API of nepali calender",
-  })
-});
 
 // Route imports
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
@@ -42,13 +41,11 @@ const advertisementRoutes = require("./routes/advertisementRoutes");
 const productRoutes = require("./routes/productRoutes");
 const commentRoutes = require("./routes/commentRoutes");
 const replayRoutes = require("./routes/replayRoutes");
-const path = require('path');
 const CartItem = require("./routes/cartItemRoutes");
 
 
 
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use("/auth", authRoutes);
 
@@ -77,6 +74,6 @@ app.use('/menu',menuRoutes)
 app.use('/submenu',subMenuRoutes)
 
 app.use('/cart',CartItem)
-// Error Middleware
+
 
 module.exports = app;
